@@ -19,7 +19,7 @@ public class MainViewModel extends AndroidViewModel {
     private CourseRepository  repository;
 
     // live data
-    private LiveData<List<Category>> categoryLiveData;
+    private LiveData<List<Category>> allCategories;
     private LiveData<List<Course>> courseLiveData;
 
     public MainViewModel(@NonNull Application application) {
@@ -29,8 +29,8 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Category>> getAllCategoies(){
-        categoryLiveData = repository.getCategories();
-        return categoryLiveData;
+        allCategories = repository.getCategories();
+        return allCategories;
     }
 
     public LiveData<List<Course>> getCourseLiveData(int categoryID){

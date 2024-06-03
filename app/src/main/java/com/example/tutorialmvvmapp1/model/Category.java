@@ -32,7 +32,7 @@ public class Category extends BaseObservable {
 
     public void setId(int id) {
         this.id = id;
-        notifyPropertyChanged(BR.id);
+        notifyPropertyChanged(BR.id );
     }
 
     @Bindable
@@ -59,5 +59,10 @@ public class Category extends BaseObservable {
         this.id = id;
         this.categoryName = categoryName;
         this.categoryDesc = categoryDesc;
+    }
+
+    @Override
+    public String toString(){
+        return this.categoryName;
     }
 }

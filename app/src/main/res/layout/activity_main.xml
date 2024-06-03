@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="spinnerAdapter"
+            type="android.widget.ArrayAdapter" />
+    
         <variable
             name="clickHandlers"
             type="com.example.tutorialmvvmapp1.MainActivity.MainClickHandler" />
@@ -28,6 +32,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <include
+            android:id="@+id/secondary_layout"
+            layout="@layout/content_main"
+            bind:secondarySpinnerAdapter="@{spinnerAdapter}"
+            bind:secondaryClickHandler="@{clickHandlers}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
