@@ -19,7 +19,7 @@ public abstract class CourseDB extends RoomDatabase {
     public static synchronized CourseDB getInstance(Context context){
 
         if(instance == null){
-            instance = Room.databaseBuilder(context.getApplicationContext(this),
+            instance = Room.databaseBuilder(context.getApplicationContext(),
                     CourseDB.class, "courses_DB")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
@@ -29,7 +29,7 @@ public abstract class CourseDB extends RoomDatabase {
     }
 
     // callback
-    private RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
