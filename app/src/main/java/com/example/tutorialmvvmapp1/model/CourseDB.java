@@ -33,6 +33,7 @@ public abstract class CourseDB extends RoomDatabase {
 
     // callback
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
@@ -92,7 +93,5 @@ public abstract class CourseDB extends RoomDatabase {
 
             }
         });
-
     }
-
 }
