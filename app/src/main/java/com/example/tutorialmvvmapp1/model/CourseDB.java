@@ -69,22 +69,22 @@ public abstract class CourseDB extends RoomDatabase {
                 Course course1 = new Course();
                 course1.setCourseName("HTML");
                 course1.setCoursePrice("100$");
-                course1.setCourseID(1);
+                course1.setCategoryID(1);
 
                 Course course2 = new Course();
                 course2.setCourseName("CSS");
                 course2.setCoursePrice("70$");
-                course2.setCourseID(1);
+                course2.setCategoryID(1);
 
                 Course course3 = new Course();
                 course3.setCourseName("PHP");
                 course3.setCoursePrice("150$");
-                course3.setCourseID(2);
+                course3.setCategoryID(2);
 
                 Course course4 = new Course();
                 course4.setCourseName("JAVA");
                 course4.setCoursePrice("170$");
-                course4.setCourseID(2);
+                course4.setCategoryID(2);
 
                 courseDAO.insert(course1);
                 courseDAO.insert(course2);

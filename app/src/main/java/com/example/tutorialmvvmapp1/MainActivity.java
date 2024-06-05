@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.tutorialmvvmapp1.ViewModel.MainViewModel;
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding activityMainBinding;
     private MainClickHandler mainClickHandler;
     private Category selectedCategory;
+
+    //  recyclerview
+    private RecyclerView courseRecyclerView;
+    private  CourseAdapter courseAdapter;
+    private ArrayList<Course> coursesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,27 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.setSpinnerAdapter(categoryArrayAdapter);
     }
 
+    public void LoadCoursesArrayList(int categoryID){
+        mainViewModel.getCourseLiveData(categoryID).observe(this, new Observer<List<Course>>() {
+            @Override
+            public void onChanged(List<Course> courses) {
+                coursesList = (ArrayList<Course>) courses;
+                LoadRecyclerView();
+            }
+        });
+    }
+
+    private void LoadRecyclerView() {
+        courseRecyclerView = activityMainBinding.secondaryLayout.recycler;
+        courseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        courseRecyclerView.setHasFixedSize(true);
+        courseAdapter = new CourseAdapter();
+        courseRecyclerView.setAdapter(courseAdapter);
+
+        courseAdapter.setCourses(coursesList);
+
+    }
+
     public class MainClickHandler {
         public void onFABClicked(View view) {
             Toast.makeText(getApplicationContext(), "FAB CLICKED", Toast.LENGTH_SHORT).show();
@@ -81,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(parent.getContext(), " "+message, Toast.LENGTH_SHORT).show();
 
+            LoadCoursesArrayList(selectedCategory.getId());
         }
     }
 }
