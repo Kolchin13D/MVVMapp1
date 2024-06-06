@@ -47,11 +47,15 @@ public class AddAndEdit extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra(COURSE_ID)){
+
+            // recycler clicked
             setTitle("Edit course");
             course.setCourseName(intent.getStringExtra(COURSE_NAME));
             course.setCoursePrice(intent.getStringExtra(COURsE_PRICE));
 
         }else {
+
+            //  fab clicked
             setTitle("Create new course");
         }
 
