@@ -12,6 +12,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.tutorialmvvmapp1.BR;
 
+import java.util.Objects;
+
 @Entity(tableName = "course_table", foreignKeys = @ForeignKey(entity = Category.class,
         parentColumns = "id", childColumns = "category_id", onDelete = CASCADE))
 public class Course extends BaseObservable {
@@ -77,5 +79,21 @@ public class Course extends BaseObservable {
     }
     @Ignore
     public Course() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return courseID == course.courseID
+                && categoryID == course.categoryID
+                && Objects.equals(courseName, course.courseName)
+                && Objects.equals(coursePrice, course.coursePrice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseID, courseName, coursePrice, categoryID);
     }
 }

@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tutorialmvvmapp1.databinding.CourseListItemBinding;
@@ -71,8 +72,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         this.listener = listener;
     }
 
-    public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses;
-        notifyDataSetChanged();
+    public void setCourses(ArrayList<Course> newCourses) {
+        //this.courses = courses;
+        //notifyDataSetChanged();
+
+         final DiffUtil.DiffResult result = DiffUtil
+                 .calculateDiff(new CourseDiffCallback(courses, newCourses), false );
+         courses = newCourses;
+         result.dispatchUpdatesTo(CourseAdapter.this);
+
+
     }
 }
