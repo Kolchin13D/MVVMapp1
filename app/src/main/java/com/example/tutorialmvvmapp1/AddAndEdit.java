@@ -14,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.tutorialmvvmapp1.databinding.ActivityAddAndEditBinding;
-import com.example.tutorialmvvmapp1.databinding.ActivityMainBinding;
 import com.example.tutorialmvvmapp1.model.Course;
 
 public class AddAndEdit extends AppCompatActivity {
@@ -22,7 +21,7 @@ public class AddAndEdit extends AppCompatActivity {
     private Course course;
     public static final String COURSE_ID = "courseID";
     public static final String COURSE_NAME = "courseName";
-    public static final String COURsE_PRICE = "coursePrice";
+    public static final String COURSE_PRICE = "coursePrice";
     private ActivityAddAndEditBinding activityAddAndEditBinding;
     private AddAndEditClickHandler clickHandler;
 
@@ -51,7 +50,7 @@ public class AddAndEdit extends AppCompatActivity {
             // recycler clicked
             setTitle("Edit course");
             course.setCourseName(intent.getStringExtra(COURSE_NAME));
-            course.setCoursePrice(intent.getStringExtra(COURsE_PRICE));
+            course.setCoursePrice(intent.getStringExtra(COURSE_PRICE));
 
         }else {
 
@@ -76,7 +75,7 @@ public class AddAndEdit extends AppCompatActivity {
             } else{
                 Intent intent = new Intent();
                 intent.putExtra(COURSE_NAME, course.getCourseName());
-                intent.putExtra(COURsE_PRICE, course.getCoursePrice());
+                intent.putExtra(COURSE_PRICE, course.getCoursePrice());
                 setResult(RESULT_OK, intent);
                 finish();
             }

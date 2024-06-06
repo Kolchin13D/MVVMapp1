@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddAndEdit.class);
                 intent.putExtra(AddAndEdit.COURSE_ID, selectedCourseID);
                 intent.putExtra(AddAndEdit.COURSE_NAME, course.getCourseName());
-                intent.putExtra(AddAndEdit.COURsE_PRICE, course.getCoursePrice());
+                intent.putExtra(AddAndEdit.COURSE_PRICE, course.getCoursePrice());
 
                 startActivityForResult(intent, EDIT_COURSE_REQUEST_CODE);
 
@@ -150,5 +150,35 @@ public class MainActivity extends AppCompatActivity {
 
             LoadCoursesArrayList(selectedCategory.getId());
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        int selectedCategoryId = selectedCategory.getId();
+
+        if(requestCode == ADD_COURSE_REQUEST_CODE && resultCode == RESULT_OK){
+            
+            Course course = new Course();
+            
+            course.setCategoryID(selectedCategoryId);
+            course.setCourseName(data.getStringExtra(AddAndEdit.COURSE_NAME));
+            course.setCoursePrice(data.getStringExtra(AddAndEdit.COURSE_PRICE));
+
+            mainViewModel.addNewCourse(course);
+
+        } else if (requestCode == EDIT_COURSE_REQUEST_CODE && resultCode == RESULT_OK) {
+
+            Course course = new Course();
+            course.setCategoryID(selectedCategoryId);
+            course.setCourseName(data.getStringExtra(AddAndEdit.COURSE_NAME));
+            course.setCoursePrice(data.getStringExtra(AddAndEdit.COURSE_PRICE));
+
+            course.setCourseID(selectedCourseID);
+            mainViewModel.updateCourse(course);
+        }
+
+
     }
 }
